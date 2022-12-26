@@ -22,5 +22,13 @@ namespace CQRS.MediatR.WebAPI.Tags
 
             return response!=null ? Ok(response) : BadRequest();
         }
+
+        [HttpPut("UpdateTag")]
+        public async Task<IActionResult> UpdateTag([FromBody]UpdateTag tag)
+        {
+            var response = await _mediator.Send(tag);
+
+            return response != null ? Ok(response) : BadRequest();
+        }
     }
 }

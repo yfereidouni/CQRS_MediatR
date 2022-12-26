@@ -10,10 +10,14 @@ using MediatR;
 
 namespace CQRS.MediatR.Model.Tags.Commands
 {
-    public class CreateTag : IRequest<ApplicationServiceResponse<Tag>>
+    public class UpdateTag : IRequest<ApplicationServiceResponse<Tag>>
     {
         [Required]
-        [StringLength(50, MinimumLength = 2)]
+        [Range(1,int.MaxValue)]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(50,MinimumLength = 2)]
         public string TagName { get; set; }
     }
 }
