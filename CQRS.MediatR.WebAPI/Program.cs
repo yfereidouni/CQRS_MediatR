@@ -1,5 +1,6 @@
 using CQRS.MediatR.BLL.Tags.Commands;
 using CQRS.MediatR.DAL.ApplicationDB;
+using CQRS.MediatR.DAL.Framework;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .AddInterceptors(new AddAuditFieldInterceptor()));
 
 builder.Services.AddMediatR(typeof(CreateTagHandler).Assembly);
 
