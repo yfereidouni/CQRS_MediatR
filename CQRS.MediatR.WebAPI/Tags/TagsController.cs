@@ -1,5 +1,6 @@
 ﻿using Azure;
 using CQRS.MediatR.Model.Tags.Commands;
+using CQRS.MediatR.Model.Tags.Queries;
 using CQRS.MediatR.WebAPI.Framework;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,14 @@ namespace CQRS.MediatR.WebAPI.Tags
 
         [HttpPut("UpdateTag")]
         public async Task<IActionResult> UpdateTag([FromBody]UpdateTag tag)
+        {
+            var response = await _mediator.Send(tag);
+
+            return response != null ? Ok(response) : BadRequest();
+        }
+
+        [HttpGet("SearchTag")]
+        public async Task<IActionResult> SearchTag([FromQuery] FilterByName tag)
         {
             var response = await _mediator.Send(tag);
 
