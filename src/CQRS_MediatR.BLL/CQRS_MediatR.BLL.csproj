@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CQRS_MediatR.DAL\CQRS_MediatR.DAL.csproj" />
+    <ProjectReference Include="..\CQRS_MediatR.Model\CQRS_MediatR.Model.csproj" />
+  </ItemGroup>
+
+</Project>
