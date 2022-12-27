@@ -2,6 +2,7 @@ using AutoFixture;
 using CQRS_MediatR.Model.Framework;
 using CQRS_MediatR.Model.Tags.Commands;
 using CQRS_MediatR.Model.Tags.Entities;
+using CQRS_MediatR.Model.Tags.Queries;
 using CQRS_MediatR.WebAPI.Tags;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -38,5 +39,34 @@ namespace CQRS_MediatR.WebAPI.Tests.Tags
 
             Assert.AreEqual(200, obj.StatusCode);
         }
+
+        [TestMethod]
+        public async Task UpdateTag_Returns_Ok()
+        {
+            var tag = _fixture.Create<UpdateTag>();
+            var response = _fixture.Create<Task<ApplicationServiceResponse<Tag>>>();
+
+            await _tagsController.UpdateTag(tag);
+
+
+            var obj = new OkObjectResult(response);
+
+            Assert.AreEqual(200, obj.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task SearchTag_Returns_Ok()
+        {
+            var tag = _fixture.Create<FilterByName>();
+            var response = _fixture.Create<Task<ApplicationServiceResponse<Tag>>>();
+
+            await _tagsController.SearchTag(tag);
+
+
+            var obj = new OkObjectResult(response);
+
+            Assert.AreEqual(200, obj.StatusCode);
+        }
+
     }
 }
